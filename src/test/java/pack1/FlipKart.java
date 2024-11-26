@@ -29,7 +29,14 @@ public class FlipKart {
 
 		driver.get("https://www.flipkart.com/");
 		driver.manage().window().maximize();
-		
+//		WebElement Login_btn=driver.findElement(By.xpath("//a[normalize-space()='Login']"));
+//		Login_btn.click();
+//		driver.findElement(By.xpath("//input[@class='r4vIwl BV+Dqf']")).sendKeys("automationframeworks1@gmail.com");
+//		driver.findElement(By.xpath("//button[normalize-space()='Request OTP']")).click();
+//		Thread.sleep(50000);
+//		driver.findElement(By.xpath("//button[normalize-space()='Verify']")).click();
+//		Thread.sleep(5000);
+
 	/*	WebElement Login_btn=driver.findElement(By.xpath("//a[normalize-space()='Login']"));
 		Login_btn.click();
 		driver.findElement(By.xpath("//input[@class='r4vIwl BV+Dqf']")).sendKeys("automationframeworks1@gmail.com");
@@ -53,7 +60,7 @@ public class FlipKart {
 		}*/
 		Actions act =new Actions(driver);
 		WebElement search_box=driver.findElement(By.xpath("//input[@placeholder='Search for Products, Brands and More']"));
-		act.click(search_box).sendKeys("samsung 5g mobile").keyUp(Keys.ENTER).keyDown(Keys.ENTER).perform();
+		act.click(search_box).sendKeys("SAMSUNG Galaxy S24+ 5G Cobalt Violet, 256 GB").keyUp(Keys.ENTER).keyDown(Keys.ENTER).perform();
 	    WebElement clickMobile=driver.findElement(By.xpath("//div[normalize-space()='SAMSUNG Galaxy S24+ 5G (Cobalt Violet, 256 GB)']"));
 	    act.moveToElement(clickMobile).click().perform();
 		Set<String>WindowIds=driver.getWindowHandles();
@@ -66,8 +73,23 @@ public class FlipKart {
 	WebElement BuyNow=driver.findElement(By.xpath("//button[normalize-space()='Buy Now']"));
 	JavascriptExecutor js=(JavascriptExecutor)driver;
 	js.executeScript("arguments[0].scrollIntoView()", BuyNow);
-	//js.executeScript("arguments[0].click()", BuyNow);
+	js.executeScript("arguments[0].click()", BuyNow);
 	act.moveToElement(BuyNow).click().perform();
+	
+	//driver.switchTo().window()
+	System.out.println(driver.getCurrentUrl());
+	Thread.sleep(5000);
+	
+	driver.findElement(By.xpath("//span[normalize-space()='CONTINUE']")).click()
+	;
+	WebElement email=driver.findElement(By.xpath("(//div//input[@type='text'])"));
+	act.click(email).sendKeys("ratnanaru06@gmail.com").perform();
+	
+	driver.findElement(By.xpath("//span[normalize-space()='CONTINUE']")).click();
+	Thread.sleep(50000);
+//	WebElement submit_btn=driver.findElement(By.xpath("//button[@type='submit' or @type='Login']"));
+//	act.click(submit_btn);
+	act.keyUp(Keys.ENTER).keyDown(Keys.ENTER).perform();
 	
          WebElement OrderSummery=driver.findElement(By.xpath("//span[normalize-space()='Order Summary']"));
             OrderSummery.click();
@@ -76,14 +98,24 @@ public class FlipKart {
 	         
 	       WebElement Accept_btn= driver.findElement(By.xpath("//button[normalize-space()='Accept & Continue']"));
 	       Accept_btn.click();
-	       WebElement payment_method=driver.findElement(By.xpath("//input[@id='PHONEPE'][@type='radio']"));
-	       if(!payment_method.isSelected()) {
-	    	   payment_method.click();
+	       Thread.sleep(3000);
+	       WebElement payment_method=driver.findElement(By.xpath("//input[@id='PHONEPE']"));
+	     //  if(!payment_method.isSelected()) {
+	    	//   payment_method.click();
+	       js.executeScript("arguments[0].click()", payment_method);
 	    	   
-	       }
+	     //  }
 	      WebElement continue_btn2= driver.findElement(By.xpath("//span[normalize-space()='CONTINUE']"));
-	      continue_btn.click();
-	
+	    //  continue_btn.click();
+	       js.executeScript("arguments[0].click()", continue_btn2);
+	       
+	       Thread.sleep(3000);
+	      WebElement payment_otp=driver.findElement(By.xpath("//button[@id='onboardingFormSubmitBtn']"));
+	       js.executeScript("arguments[0].scrollIntoView()", continue_btn2);
+
+	       js.executeScript("arguments[0].click()", continue_btn2);
+
+
 	
 	}
 	
